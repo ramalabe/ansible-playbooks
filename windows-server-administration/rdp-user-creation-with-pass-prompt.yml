@@ -1,0 +1,32 @@
+---
+- name: Create a Windows user
+  hosts: svr_name          #Specify the server name name here (Same as hosts / inventory file)
+  gather_facts: false
+  vars_prompt:
+    - name: svr_pass  #Var name should be the same as whats in the hosts/inventory file
+      prompt: "Enter Server Login Password"
+
+    - name: username
+      prompt: "Enter the Username"
+      private: false
+
+    - name: user_fullname
+      prompt: "Enter the Full Name: "
+      private: false
+
+    - name: user_password
+      prompt: "Enter the User Password: "
+      private: false
+  
+  tasks:
+    - name: Creating the user
+      ansible.builtin.win_user:
+        name: "{{ username }}"
+        fullname: "{{ user_fullname }}"  
+        password: "{{ user_password }}"
+        password_never_expires: yes #optional - modify as required
+        user_cannot_change_password: yes #optional - modify as required
+        state: present
+        groups:
+          - Users
+          - Remote Desktop Users
