@@ -1,10 +1,13 @@
 ---
 - name: Create a Windows user
-  hosts: svr_name          #Specify the server name here (Same as hosts / inventory file)
+  hosts: svr_grp_name          #Specify the server group name here (Same as hosts / inventory file)
   gather_facts: false
   vars_prompt:
-    - name: svr_pass  #Var name should be the same as whats in the hosts/inventory file
-      prompt: "Enter Server Login Password"
+    - name: svr_1_pass  #Var name should be the same as whats in the hosts/inventory file
+      prompt: "Enter Server 1 Login Password"
+
+    - name: svr_2_pass  #Var name should be the same as whats in the hosts/inventory file
+      prompt: "Enter Server 2 Login Password"
 
     - name: username
       prompt: "Enter the Username"
@@ -28,5 +31,5 @@
         user_cannot_change_password: yes #optional - modify as required
         state: present
         groups:
-          - Users
           - Remote Desktop Users
+          - Users

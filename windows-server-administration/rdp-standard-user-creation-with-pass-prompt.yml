@@ -1,6 +1,6 @@
 ---
 - name: Create a Windows user
-  hosts: svr_name          #Specify the server name name here (Same as hosts / inventory file)
+  hosts: svr_name          #Specify the server name here (Same as hosts / inventory file)
   gather_facts: false
   vars_prompt:
     - name: svr_pass  #Var name should be the same as whats in the hosts/inventory file
